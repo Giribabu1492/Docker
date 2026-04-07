@@ -1,19 +1,19 @@
 resource "aws_instance" "this" {
-  ami                    = "ami-09c813fb71547fc4f"
-  vpc_security_group_ids = [aws_security_group.allow_tls_u.id]
-  instance_type          = "t2.micro"
+  ami                    = "ami-0220d79f3f480ecf5"
+  vpc_security_group_ids = [aws_security_group.allow_all.id]
+  instance_type          = "t3.micro"
   root_block_device {
     volume_size = 50
     volume_type = "gp3"
   }
   user_data = file("docker.sh")
   tags = {
-    Name    = "docker"
+    Name = "docker"
   }
 }
-resource "aws_security_group" "allow_tls_u" {
-  name        = "allow_tls_u"
-  description = "Allow TLS inbound traffic"
+resource "aws_security_group" "allow_all" {
+  name        = "allow_all"
+  description = "Allow all inbound traffic"
 
   ingress {
     from_port   = 22
@@ -41,5 +41,5 @@ resource "aws_security_group" "allow_tls_u" {
 }
 output "ec2_info" {
   value = aws_instance.this
-  
+
 }

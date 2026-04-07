@@ -7,6 +7,7 @@ metadata:
 
 managedNodeGroups:
   - name: expense
-    instanceTypes: ["m5.large","c3.large","c4.large","c5.large"]
-    desiredCapacity: 3
+    # Stick to t3.micro for Free Tier (if eligible in your region)
+    instanceTypes: ["t3.micro","t3.small","c7i-flex.large","m7i-flex.large"]  # Added more instance types to increase chances of getting spot instances
+    desiredCapacity:2        # Reduced to 2 to stay within the 750-hour monthly limit (2 * 375 hrs)
     spot: true
